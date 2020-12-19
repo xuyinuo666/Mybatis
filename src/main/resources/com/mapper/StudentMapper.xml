@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.StudentDao">
+    <!--    为了解决数据库字段和实体类属性名不同,使用resultMap-->
+    <resultMap id="mystudent" type="Student">
+        <id column="sid" property="Mysid"></id>
+        <result property="Myname" column="name"></result>
+        <result column="age" property="Myage"></result>
+        <association property="address" javaType="address">
+            <!--association:关联属性-->
+            <result property="Myaddress" column="address"></result>
+            <result column="phone" property="Myphone"></result>
+        </association>
+    </resultMap>
+    <select id="FindById" resultMap="mystudent">
+        select * from student where id=#{myid} and age=#{myage}
+    </select>
+    <!--        一对多-->
+    <!--    association是用于一对一和多对一，而collection是用于一对多的关系-->
+    <resultMap id="MyTeacher" type="Teacher">
+        <result property="name" column="teachername"></result>
+        <result column="tid" property="teacherid"></result>
+        <collection property="students" javaType="List" ofType="Student">
+            <result property="Myname" column="sname"></result>
+            <result column="studentid" property="Mysid"></result>
+        </collection>
+    </resultMap>
+    <select id="FindStudentByTeacher" resultMap="MyTeacher">
+    select s.name sname ,t.name teachername, t.tid teacherid,s.sid studentid
+    from teacher t,student s
+    where t.tid=s.sid and t.tid=#{tid}
+    </select>
+
+
+
+    <!--动态SQL-->
+    <resultMap id="SQL1" type="Student">
+        <id column="sid" property="Mysid"></id>
+        <result property="Myname" column="name"></result>
+        <result column="age" property="Myage"></result>
+        <association property="address" javaType="address">
+            <!--association:关联属性-->
+            <result property="Myaddress" column="address"></result>
+            <result column="phone" property="Myphone"></result>
+        </association>
+    </resultMap>
+    <select id="selectByIf" resultMap="SQL1">
+        select * from student where
+        <if test="ByIfID !=null">
+            id=#{ByIfID}
+        </if>
+        <if test="ByIfNAME!=null">
+            and name=#{ByIfNAME}
+        </if>
+    </select>
+
+</mapper>

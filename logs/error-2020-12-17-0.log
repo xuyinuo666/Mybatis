@@ -1,0 +1,30 @@
+3187 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+An attempt was made to call a method that does not exist. The attempt was made from the following location:
+
+    org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration$ThymeleafDefaultConfiguration.templateEngine(ThymeleafAutoConfiguration.java:141)
+
+The following method did not exist:
+
+    org.thymeleaf.spring5.SpringTemplateEngine.setRenderHiddenMarkersBeforeCheckboxes(Z)V
+
+The method's class, org.thymeleaf.spring5.SpringTemplateEngine, is available from the following locations:
+
+    jar:file:/D:/Maven/reponsitory/org/thymeleaf/thymeleaf-spring5/3.0.9.RELEASE/thymeleaf-spring5-3.0.9.RELEASE.jar!/org/thymeleaf/spring5/SpringTemplateEngine.class
+
+The class hierarchy was loaded from the following locations:
+
+    org.thymeleaf.spring5.SpringTemplateEngine: file:/D:/Maven/reponsitory/org/thymeleaf/thymeleaf-spring5/3.0.9.RELEASE/thymeleaf-spring5-3.0.9.RELEASE.jar
+    org.thymeleaf.TemplateEngine: file:/D:/Maven/reponsitory/org/thymeleaf/thymeleaf/3.0.9.RELEASE/thymeleaf-3.0.9.RELEASE.jar
+
+
+Action:
+
+Correct the classpath of your application so that it contains a single, compatible version of org.thymeleaf.spring5.SpringTemplateEngine
+
