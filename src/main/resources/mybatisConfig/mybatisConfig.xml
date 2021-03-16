@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--    通过使用配置文件导入-->
+    <properties resource="mybatisConfig/MybatisData.properties"></properties>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${sqldriver}"/>
+                <property name="url" value="${sqlurl}"/>
+                <property name="username" value="${sqlname}"/>
+                <property name="password" value="${sqlpass}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--    将实体类起别名 ，默认就是类名-->
+    <!--    <typeAliases>-->
+    <!--        <package name="domain.blog"/>-->
+    <!--    </typeAliases>-->
+    <!--    单个类起别名 -->
+    <!--    <typeAliases>-->
+    <!--        <typeAlias alias="Author" type="domain.blog.Author"/>-->
+    <!--        <typeAlias alias="Blog" type="domain.blog.Blog"/>-->
+    <!--        <typeAlias alias="Comment" type="domain.blog.Comment"/>-->
+    <!--        <typeAlias alias="Post" type="domain.blog.Post"/>-->
+    <!--        <typeAlias alias="Section" type="domain.blog.Section"/>-->
+    <!--        <typeAlias alias="Tag" type="domain.blog.Tag"/>-->
+    <!--    </typeAliases>-->
+    <mappers>
+        <mapper resource="mapper/UserMapper.xml"/>
+    </mappers>
+</configuration>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.UserDao">
+    <!--    在使用 Java 配置SQL文件时可以省略 -->
+    <!--    <insert id="inserUser" parameterType="pojo.User">-->
+    <!--        insert into user (id ,name,email,age) values (#{userID},#{userName},#{userEmail},#{userAge})-->
+    <!--    </insert>-->
+
+
+    <!-- SQL语句重复使用:
+        <sql id="userColumns"> ${alias}.id,${alias}.username,${alias}.password </sql>
+
+
+        <select id="selectUsers" resultType="map">
+          select
+            <include refid="userColumns"><property name="alias" value="t1"/></include>,
+            <include refid="userColumns"><property name="alias" value="t2"/></include>
+          from some_table t1
+            cross join some_table t2
+        </select>
+    -->
+<!--    注入形式 ：
+        构造方法注入
+            <constructor>
+               <idArg column="id" javaType="int" name="id" />
+               <arg column="age" javaType="_int" name="age" />
+               <arg column="username" javaType="String" name="username" />
+            </constructor>
+-->
+
+    <select id="selectByID" resultMap="baseMap" parameterType="int">
+        select id ,name, email ,age  from user where id = #{userID}
+    </select>
+    <resultMap id="baseMap" type="pojo.User">
+        <id column="id" property="userID"></id>
+        <result column="name" property="userName"></result>
+        <result column="age" property="userAge"></result>
+        <result column="email" property="userEmail"></result>
+    </resultMap>
+
+</mapper>
